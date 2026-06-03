@@ -69,6 +69,7 @@ const verifyOTP = async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     return res.status(200).json({
@@ -106,8 +107,11 @@ const getMe = async (req, res) => {
 };
 
 const logout = (req, res) => {
-  res.clearCookie("token");
-
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  });
   return res.json({
     success: true,
 
