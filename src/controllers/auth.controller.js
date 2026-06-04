@@ -70,7 +70,6 @@ const verifyOTP = async (req, res) => {
       secure: true,
       sameSite: "none",
       path: "/",
-      domain: undefined,
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -101,7 +100,7 @@ const getMe = async (req, res) => {
     return res.json({
       loggedIn: true,
 
-      user: decoded.user,
+      user: decoded.id,
     });
   } catch (error) {
     return res.json({ loggedIn: false });
