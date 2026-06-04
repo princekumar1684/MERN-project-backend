@@ -11,7 +11,7 @@ app.set("trust proxy", 1);
 
 app.use(
   cors({
-    origin: "https://mern-project-frontend-blond.vercel.app/",
+    origin: "https://mern-project-frontend-blond.vercel.app",
     credentials: true,
   })
 );
