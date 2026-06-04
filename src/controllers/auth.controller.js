@@ -89,18 +89,19 @@ const verifyOTP = async (req, res) => {
 
 const getMe = async (req, res) => {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization;
 
-    if (!token) {
+    if (!authHeader) {
       return res.json({ loggedIn: false });
     }
+
+    const token = authHeader.split(" ")[1];
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     return res.json({
       loggedIn: true,
-
-      user: decoded._id,
+      user: decoded.id,
     });
   } catch (error) {
     return res.json({ loggedIn: false });
