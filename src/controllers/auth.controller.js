@@ -100,7 +100,7 @@ const getMe = async (req, res) => {
     return res.json({
       loggedIn: true,
 
-      user: decoded.id,
+      user: decoded._id,
     });
   } catch (error) {
     return res.json({ loggedIn: false });
