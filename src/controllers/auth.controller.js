@@ -59,9 +59,14 @@ const verifyOTP = async (req, res) => {
       user = await UserModel.findOne({ mobile });
     }
 
-    if (!user) {
-      user = await UserModel.create({ email, mobile });
-    }
+if (!user) {
+  const userData = {};
+
+  if (email) userData.email = email;
+  if (mobile) userData.mobile = mobile;
+
+  user = await UserModel.create(userData);
+}
 
     const token = generateToken(user._id);
 
