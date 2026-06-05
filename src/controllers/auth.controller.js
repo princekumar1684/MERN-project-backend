@@ -94,13 +94,11 @@ if (!user) {
 
 const getMe = async (req, res) => {
   try {
-    const authHeader = req.headers.authorization;
+    const token = req.cookies.token;
 
-    if (!authHeader) {
+    if (!token) {
       return res.json({ loggedIn: false });
     }
-
-    const token = authHeader.split(" ")[1];
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
@@ -112,6 +110,8 @@ const getMe = async (req, res) => {
     return res.json({ loggedIn: false });
   }
 };
+
+module.exports = { getMe };
 
 const logout = (req, res) => {
   res.clearCookie("token", {
